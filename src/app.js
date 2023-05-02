@@ -3,6 +3,7 @@ import router from "./routes/index.js";
 import passport from "passport";
 import Google_pass from "./auth/passport.js";
 import session from "express-session";
+import tokenGen from "./middlewares/tokenGen.js";
 
 const app = express();
 
@@ -21,17 +22,16 @@ app.use('/api/v1', router);
 
 app.get('/', (req, res) => {
     res.send('Hello lighto!');
-}
-);
+});
 
 app.get('/auth/google',
     Google_pass.authenticate('google', { scope: ['profile', 'email'] }));
 
 app.get('/auth/google/callback',
     Google_pass.authenticate('google', { failureRedirect: '/error' }),
-    function (req, res) {
-        // Successful authentication, redirect success.
-        res.redirect('/');
+    async (req, res) => {
+        const token = await tokenGen({ id: req.user.id, username: req.user.username })
+        res.cookie("tokie", token).status(201).redirect('/')
     });
 
 passport.serializeUser(function (user, cb) {
