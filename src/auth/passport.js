@@ -1,6 +1,6 @@
 import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
 import passport from 'passport';
-import findUserQuery from '../database/queries/findUserQuery.js';
+import signUserQuery from '../database/queries/signUserQuery.js';
 import createUserQuery from '../database/queries/createUserQuery.js';
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
 
@@ -9,7 +9,7 @@ passport.use(new GoogleStrategy({
     clientSecret: GOOGLE_CLIENT_SECRET,
     callbackURL: 'http://localhost:8080/auth/google/callback'
 }, (access_token, refresh_token, profile, done) => {
-    findUserQuery(profile.emails[0].value).then((user) => {
+    signUserQuery(profile.emails[0].value).then((user) => {
         if (user.rows[0]) {
             return done(null, user.rows[0]);
         } else {
