@@ -17,8 +17,7 @@ const signinCont = async (req, res) => {
                 res.status(401).json({ message: 'Invalid email or password' })
             } else {
                 const token = await tokenGen({ id, username })
-                res.cookie('tokie', token,
-                    { maxAge: 1000 * 60 * 60 * 24 * 7, httpOnly: true, secure: true, sameSite: 'none' })
+                res.cookie('tokie', token)
                     .status(200).json({ message: 'User logged in', user: { id, username, email } })
             }
         }
