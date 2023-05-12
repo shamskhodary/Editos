@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Navbar from "./componenets/Navbar";
 import Documents from "./componenets/Documents";
+
 const router = createBrowserRouter([
   {
     path: "/",

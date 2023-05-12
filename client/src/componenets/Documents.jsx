@@ -1,6 +1,8 @@
 import '../styles/documents.css';
 import { Col, Dropdown, Row, Tooltip } from 'antd';
 import { MoreOutlined, DeleteFilled, EditFilled } from '@ant-design/icons';
+
+
 const items = [
   {
     label:(<><EditFilled /> Rename</>),
@@ -12,7 +14,7 @@ const items = [
   },
 ];
 
-const Documents = () => {
+const Documents = () => { 
   return ( 
     <div className="documents">
       <h4>Recent documents</h4>
