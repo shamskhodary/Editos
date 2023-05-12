@@ -1,9 +1,12 @@
 import "./App.css";
-import Navbar from "./componenets/Navbar";
+import {RouterProvider} from 'react-router-dom';
+import router from "./routes";
 
 // import TextEditor from "./componenets/TextEditor";
 function App() {
-  return <Navbar />;
+  return (
+   <RouterProvider router={router}/>
+  );
 }
 
 export default App;

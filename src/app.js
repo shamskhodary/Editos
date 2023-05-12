@@ -5,7 +5,7 @@ import Google_pass from "./auth/passport.js";
 import session from "express-session";
 import tokenGen from "./middlewares/tokenGen.js";
 import cookieParser from "cookie-parser";
-
+import cors from "cors";
 const app = express();
 
 app.use(express.json());
@@ -20,6 +20,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
 app.use("/api/v1", router);
 
 app.get("/", (req, res) => {
