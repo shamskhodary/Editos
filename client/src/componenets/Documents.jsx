@@ -1,5 +1,5 @@
 import '../styles/documents.css';
-import { Col, Dropdown, Row } from 'antd';
+import { Col, Dropdown, Row, Tooltip } from 'antd';
 import { MoreOutlined, DeleteFilled, EditFilled } from '@ant-design/icons';
 const items = [
   {
@@ -23,14 +23,15 @@ const Documents = () => {
         md: 24,
         lg: 32,
       }}
-      style={{gap: "1rem", margin: "0"}}
+      className='row'
+      style={{gap: "1rem", margin: "0", flexWrap: "wrap", justifyContent: "space-between"}}
     >
       <Col className="gutter-row" span={4} >
         <div className='content-preview'>
-          <p>dfdsfdsfdsfdsfdsfdsfsfsdfsdf</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
         </div>
         <div className="details">
-          <h3>production écrite</h3>
+          <Tooltip title="production écrite, ce n'est pas possible ce qu'on fait"><h3>production écrite, ce n'est pas possible ce qu'on fait </h3></Tooltip>
           <div className="more-details">
           <span>Opened 22:24</span>
           <Dropdown menu={{ items }}
