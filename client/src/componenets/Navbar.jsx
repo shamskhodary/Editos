@@ -2,28 +2,14 @@ import React from "react";
 import { Avatar, AutoComplete, Input, Tooltip } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import "../styles/navbar.css";
-import Typewriter from 'typewriter-effect';
+import LogoWriter from "./LogoWriter";
+import { Outlet } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <>
       <header className="header">
-        <div className="logo">
-          <Typewriter
-          style={{color: "white"}}
-            onInit={(typewriter) => {
-              typewriter
-                .typeString("Editor")
-                .pauseFor(500)
-                .deleteChars(1)
-                .callFunction(() => {
-                  console.log("All strings were deleted");
-                })
-                .typeString("s")
-                .start();
-            }}
-          />
-        </div>
+        <LogoWriter />
         <AutoComplete
           popupClassName="certain-category-search-dropdown"
           className="auto"
@@ -35,11 +21,12 @@ const Navbar = () => {
           <Input.Search size="large" placeholder="input here" />
         </AutoComplete>
         <div className="avatar">
-        <Tooltip title="user" style={{backgroundColor: "red"}}>
-        <Avatar icon={<UserOutlined />} />
-        </Tooltip>
+          <Tooltip title="user" style={{ backgroundColor: "red" }}>
+            <Avatar icon={<UserOutlined />} />
+          </Tooltip>
         </div>
       </header>
+      <Outlet />
     </>
   );
 };

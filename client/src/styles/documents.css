@@ -15,9 +15,15 @@
 }
 
 .gutter-row:hover {
-  border: 1px solid #4285F4;
+  border: 1px solid #4285f4;
   cursor: pointer;
+  
 }
+
+/* .row {
+
+} */
+
 
 .content-preview {
   line-height: 1rem;
