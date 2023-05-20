@@ -3,7 +3,6 @@ import { Avatar, AutoComplete, Input, Tooltip } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import "../styles/navbar.css";
 import LogoWriter from "./LogoWriter";
-import { Outlet } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -26,7 +25,6 @@ const Navbar = () => {
           </Tooltip>
         </div>
       </header>
-      <Outlet />
     </>
   );
 };

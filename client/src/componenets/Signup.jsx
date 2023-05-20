@@ -4,12 +4,12 @@ import { Input } from "antd";
 import { EyeTwoTone, EyeInvisibleOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import LogoWriter from "../componenets/LogoWriter";
-import axios from "axios";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/authContext";
+
 
 const Signup = () => {
-  const navigate = useNavigate();
+  const auth = useAuth();
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -20,14 +20,13 @@ const Signup = () => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    const submitUser = await axios.post("/signup", user);
+  const handleSubmit = async () => {
+    const submitUser = await auth.signup(user)
 
-    if (submitUser.status === 201) {
-      toast.success(submitUser.data.message);
-      navigate("/");
+    if (submitUser.isLogged === true) {
+      toast.success(submitUser.message);
     } else {
-      console.log(submitUser);
+      toast.error(submitUser.message)
     }
   };
 

@@ -17,12 +17,12 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: auth.user?.id ? (
+      element: auth.user ? (
         <>
           <Home />
         </>
       ) : (
-        <Navigate to="/login" />
+        <Navigate to="/login" replace={true} />
       ),
     },
     {

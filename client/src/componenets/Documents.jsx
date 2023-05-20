@@ -1,8 +1,6 @@
 import "../styles/documents.css";
 import { Col, Dropdown, Row, Tooltip } from "antd";
 import { MoreOutlined, DeleteFilled, EditFilled } from "@ant-design/icons";
-import { useAuth } from "../context/authContext";
-import { Outlet } from "react-router-dom";
 
 const items = [
   {
@@ -24,7 +22,6 @@ const items = [
 ];
 
 const Documents = () => {
-  const auth = useAuth();
 
   const style = {
     margin: "1rem",
@@ -144,7 +141,6 @@ const Documents = () => {
           </div>
         </Col>
       </Row>
-      <Outlet />
     </div>
   );
 };
