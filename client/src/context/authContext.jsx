@@ -17,9 +17,21 @@ const useProvideAuth = () => {
       }
       return {isLogged: true, message: userData.data.message}
     } catch (error) {
-      console.log(error.response.data.message)
       setUser(null)
       return {isLogged: false, message:error.response.data.message }
+    }
+  }
+
+  const login = async(payload) => {
+    try {
+      const userData = await axios.post('/signin', payload);
+      if(userData.status === 200){
+        setUser(userData.data.user)
+      }
+      return {isLogged: true, message: userData.data.message}
+    } catch (error) {
+      console.log(error)
+      return {isLogged: false, message: error.response.data.message}
     }
   }
 
@@ -32,7 +44,7 @@ const useProvideAuth = () => {
     getUser();
   }, []);
 
-  return { user, signup };
+  return { user, signup, login };
 };
 
 const ProvideAuth = ({ children }) => {

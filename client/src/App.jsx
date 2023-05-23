@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const auth = useAuth();
-  console.log(auth.user);
+
   const router = createBrowserRouter([
     {
       path: "/",

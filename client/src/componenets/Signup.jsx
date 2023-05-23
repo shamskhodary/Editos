@@ -6,6 +6,8 @@ import { Button } from "antd";
 import LogoWriter from "../componenets/LogoWriter";
 import { toast } from "react-toastify";
 import { useAuth } from "../context/authContext";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 
 const Signup = () => {
@@ -29,6 +31,16 @@ const Signup = () => {
       toast.error(submitUser.message)
     }
   };
+
+  const handleGoogle = async() =>{
+    try {
+      const response = await axios.get('/auth/google');
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
 
   return (
     <div className="signup">
@@ -66,7 +78,9 @@ const Signup = () => {
             onChange={handleChange}
           />
         </label>
-
+            <Link to="/login">Already have an account?</Link>
+            <button onClick={handleGoogle}>google</button>
+            
         <Button
           className="submit-button"
           type="primary"

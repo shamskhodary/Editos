@@ -8,8 +8,11 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 const app = express();
 
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use(cookieParser());
 app.use(
   session({
@@ -20,7 +23,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cors());
+
 app.use("/api/v1", router);
 
 app.get("/", (req, res) => {
@@ -28,18 +31,22 @@ app.get("/", (req, res) => {
 });
 
 app.get(
-  "/auth/google",
-  Google_pass.authenticate("google", { scope: ["profile", "email"] })
+  "/api/v1/auth/google",
+  Google_pass.authenticate("google", {
+    scope: ["profile", "email"],
+    prompt: "consent",
+  })
 );
 
 app.get(
-  "/auth/google/callback",
+  "/api/v1/auth/google/callback",
   Google_pass.authenticate("google", { failureRedirect: "/error" }),
   async (req, res) => {
     const token = await tokenGen({
       id: req.user.id,
       username: req.user.username,
     });
+
     res.cookie("tokie", token).status(201).redirect("/");
   }
 );
