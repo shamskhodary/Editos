@@ -1,9 +1,10 @@
-import connection from '../config/connection.js';
+import connection from "../config/connection.js";
 
-const creatUserquery = (username, email, password) => {
-
-    return connection.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *', [username, email, password]);
-
+const createUserQuery = (username, email, password, image) => {
+  return connection.query(
+    "INSERT INTO users (username, email, password, image) VALUES ($1, $2, $3, $4) RETURNING *",
+    [username, email, password, image]
+  );
 };
 
-export default creatUserquery;
+export default createUserQuery;

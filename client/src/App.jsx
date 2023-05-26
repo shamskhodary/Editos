@@ -1,8 +1,6 @@
 import "./App.css";
 import { RouterProvider } from "react-router-dom";
 import { createBrowserRouter } from "react-router-dom";
-// import Navbar from "./componenets/Navbar";
-// import Documents from "./componenets/Documents";
 import Home from "./pages/Home";
 import { useAuth } from "./context/authContext";
 import Signup from "./componenets/Signup";

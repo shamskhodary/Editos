@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import "../styles/signup.css";
-import { Input } from "antd";
+import { Input, Button } from "antd";
 import { EyeTwoTone, EyeInvisibleOutlined } from "@ant-design/icons";
-import { Button } from "antd";
 import LogoWriter from "../componenets/LogoWriter";
 import { toast } from "react-toastify";
 import { useAuth } from "../context/authContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import { GoogleLogin } from "@react-oauth/google";
 
 const Signup = () => {
   const auth = useAuth();
@@ -23,24 +22,25 @@ const Signup = () => {
   };
 
   const handleSubmit = async () => {
-    const submitUser = await auth.signup(user)
+    const submitUser = await auth.signup(user);
 
     if (submitUser.isLogged === true) {
       toast.success(submitUser.message);
     } else {
-      toast.error(submitUser.message)
+      toast.error(submitUser.message);
     }
   };
 
-  const handleGoogle = async() =>{
-    try {
-      const response = await axios.get('/auth/google');
-      console.log(response)
-    } catch (error) {
-      console.log(error)
+  const handleGoogle = async(response) => {
+    const credentials = await axios.post('/google-login', {token: response.credential });
+    if(credentials.data){
+      auth.setUser(credentials.data.user);
+      toast.success(credentials.data.message);
+    }else {
+      toast.error("something went wrong")
     }
+  };
 
-  }
 
   return (
     <div className="signup">
@@ -78,9 +78,9 @@ const Signup = () => {
             onChange={handleChange}
           />
         </label>
-            <Link to="/login">Already have an account?</Link>
-            <button onClick={handleGoogle}>google</button>
-            
+        <Link to="/login">Already have an account?</Link>
+        <GoogleLogin onSuccess={handleGoogle} />
+
         <Button
           className="submit-button"
           type="primary"

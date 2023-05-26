@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect, createContext } from "react";
 import axios from "axios";
 
-
 const AuthContext = createContext();
 
 const useAuth = () => useContext(AuthContext);
@@ -12,39 +11,43 @@ const useProvideAuth = () => {
   const signup = async (payload) => {
     try {
       const userData = await axios.post("/signup", payload);
-      if(userData.status === 201){
-        setUser(userData.data.user)
+      if (userData.status === 201) {
+        setUser(userData.data.user);
       }
-      return {isLogged: true, message: userData.data.message}
+      return { isLogged: true, message: userData.data.message };
     } catch (error) {
-      setUser(null)
-      return {isLogged: false, message:error.response.data.message }
+      setUser(null);
+      return { isLogged: false, message: error.response.data.message };
     }
-  }
+  };
 
-  const login = async(payload) => {
+  const login = async (payload) => {
     try {
-      const userData = await axios.post('/signin', payload);
-      if(userData.status === 200){
-        setUser(userData.data.user)
+      const userData = await axios.post("/signin", payload);
+      if (userData.status === 200) {
+        setUser(userData.data.user);
       }
-      return {isLogged: true, message: userData.data.message}
+      return { isLogged: true, message: userData.data.message };
     } catch (error) {
-      console.log(error)
-      return {isLogged: false, message: error.response.data.message}
+      console.log(error);
+      return { isLogged: false, message: error.response.data.message };
     }
-  }
+  };
 
   useEffect(() => {
     const getUser = async () => {
-      const user = await axios.get("/user/me");
-
-      setUser(user.data.data);
+      try {
+        const user = await axios.get("/user/me");
+        console.log(user.data)
+        setUser(user.data.data);
+      } catch (error) {
+        console.log(error);
+      }
     };
     getUser();
   }, []);
 
-  return { user, signup, login };
+  return { user, signup, login, setUser };
 };
 
 const ProvideAuth = ({ children }) => {

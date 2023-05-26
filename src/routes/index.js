@@ -11,10 +11,12 @@ import addDocumentCont from "../controllers/addDocumentCont.js";
 import updateDocumentCont from "../controllers/updateDocumentCont.js";
 import addContentCont from "../controllers/addContentCont.js";
 import authCont from "../controllers/authCont.js";
+import googleOAuth from "../auth/googleOAuth.js";
 
 router.post("/signup", signupCont);
 router.post("/signin", signinCont);
 router.post("/signout", signoutCont);
+router.post("/google-login", googleOAuth);
 
 router.get("/user/me", verifyUser, authCont);
 
