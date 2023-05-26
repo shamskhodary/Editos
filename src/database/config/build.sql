@@ -7,7 +7,8 @@ CREATE TABLE users(
   id SERIAL PRIMARY KEY,
   username VARCHAR(150) UNIQUE NOT NULL,
   email VARCHAR(150) UNIQUE,
-  password TEXT NOT NULL
+  password TEXT NOT NULL,
+  image TEXT NULL DEFAULT 'https://www.atlantawatershed.org/wp-content/uploads/2017/06/default-placeholder.png'
 );
 INSERT INTO users (username,
     email,
