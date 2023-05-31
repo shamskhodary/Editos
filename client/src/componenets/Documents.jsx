@@ -1,6 +1,9 @@
+import axios from 'axios';
+import * as moment from 'moment';
 import "../styles/documents.css";
 import { Col, Dropdown, Row, Tooltip } from "antd";
 import { MoreOutlined, DeleteFilled, EditFilled } from "@ant-design/icons";
+import { useEffect, useState } from "react";
 
 const items = [
   {
@@ -23,123 +26,50 @@ const items = [
 
 const Documents = () => {
 
+  const [documents, setDocuments] = useState(null);
+
+  useEffect(()=>{
+    const docs = async() => {
+      try {
+        const response = await axios.get('/documents');
+        setDocuments(response.data);
+      } catch (error) {
+        setDocuments(null);
+      }    
+    }
+
+    docs();
+  },[]);
+
   const style = {
     margin: "1rem",
   };
 
+  if(!documents) return <div>Loading...</div>
+
   return (
     <div className="documents">
-      <h6>Recent documents</h6>
-      <Row className="row" gutter={16} style={{ gap: "1rem" }}>
-        <Col className="gutter-row" span={4} style={style}>
+      <h2>Recent documents</h2>
+      <Row className="row" gutter={16}>
+        {documents.map((e) => 
+          <Col className="gutter-row" span={4} style={style} key={e.id}>
           <div className="content-preview">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum
-            </p>
+            <p>{e.inner_content}</p>
           </div>
           <div className="details">
-            <Tooltip title="production écrite, ce n'est pas possible ce qu'on fait">
-              <h3>production écrite, ce n'est pas possible ce qu'on fait </h3>
+            <Tooltip title={e.title}>
+              <h3>{e.title}</h3>
             </Tooltip>
             <div className="more-details">
-              <span>Opened 22:26</span>
+              <span>Opened {moment(e.last_opened).calendar()}</span>
               <Dropdown menu={{ items }} trigger={["click"]}>
                 <MoreOutlined className="dots-icon" />
               </Dropdown>
             </div>
           </div>
         </Col>
-
-        <Col className="gutter-row" span={4} style={style}>
-          <div className="content-preview">
-            <p>dfdsfdsfdsfdsfdsfdsfsfsdfsdf</p>
-          </div>
-          <div className="details">
-            <h3>production écrite</h3>
-            <div className="more-details">
-              <span>Opened 22:26</span>
-              <Dropdown menu={{ items }} trigger={["click"]}>
-                <MoreOutlined className="dots-icon" />
-              </Dropdown>
-            </div>
-          </div>
-        </Col>
-        <Col className="gutter-row" span={4} style={style}>
-          <div className="content-preview">
-            <p>dfdsfdsfdsfdsfdsfdsfsfsdfsdf</p>
-          </div>
-          <div className="details">
-            <h3>production écrite</h3>
-            <div className="more-details">
-              <span>Opened 22:26</span>
-              <Dropdown menu={{ items }} trigger={["click"]}>
-                <MoreOutlined className="dots-icon" />
-              </Dropdown>
-            </div>
-          </div>
-        </Col>
-        <Col className="gutter-row" span={4} style={style}>
-          <div className="content-preview">
-            <p>dfdsfdsfdsfdsfdsfdsfsfsdfsdf</p>
-          </div>
-          <div className="details">
-            <h3>production écrite</h3>
-            <div className="more-details">
-              <span>Opened 22:26</span>
-              <Dropdown menu={{ items }} trigger={["click"]}>
-                <MoreOutlined className="dots-icon" />
-              </Dropdown>
-            </div>
-          </div>
-        </Col>
-        <Col className="gutter-row" span={4} style={style}>
-          <div className="content-preview">
-            <p>dfdsfdsfdsfdsfdsfdsfsfsdfsdf</p>
-          </div>
-          <div className="details">
-            <h3>production écrite</h3>
-            <div className="more-details">
-              <span>Opened 22:26</span>
-              <Dropdown menu={{ items }} trigger={["click"]}>
-                <MoreOutlined className="dots-icon" />
-              </Dropdown>
-            </div>
-          </div>
-        </Col>
-        <Col className="gutter-row" span={4} style={style}>
-          <div className="content-preview">
-            <p>dfdsfdsfdsfdsfdsfdsfsfsdfsdf</p>
-          </div>
-          <div className="details">
-            <h3>production écrite</h3>
-            <div className="more-details">
-              <span>Opened 22:26</span>
-              <Dropdown menu={{ items }} trigger={["click"]}>
-                <MoreOutlined className="dots-icon" />
-              </Dropdown>
-            </div>
-          </div>
-        </Col>
-        <Col className="gutter-row" span={4} style={style}>
-          <div className="content-preview">
-            <p>dfdsfdsfdsfdsfdsfdsfsfsdfsdf</p>
-          </div>
-          <div className="details">
-            <h3>production écrite</h3>
-            <div className="more-details">
-              <span>Opened 22:26</span>
-              <Dropdown menu={{ items }} trigger={["click"]}>
-                <MoreOutlined className="dots-icon" />
-              </Dropdown>
-            </div>
-          </div>
-        </Col>
+        )}
+      
       </Row>
     </div>
   );

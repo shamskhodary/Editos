@@ -9,7 +9,7 @@
   padding: 0.5rem 1rem;
   border-radius: 0 0 5px 5px;
   height: 4rem;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
 .logo {
@@ -21,10 +21,21 @@
 }
 
 .avatar {
-  width: 10%;
   height: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   margin-right: 1rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.avatar input {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  z-index: 1000;
+  border-radius: 50%;
+  border: 1px solid black;
+  opacity: 0;
 }

@@ -12,6 +12,7 @@ import updateDocumentCont from "../controllers/updateDocumentCont.js";
 import addContentCont from "../controllers/addContentCont.js";
 import authCont from "../controllers/authCont.js";
 import googleOAuth from "../auth/googleOAuth.js";
+import updateImgCont from "../controllers/updateImgCont.js";
 
 router.post("/signup", signupCont);
 router.post("/signin", signinCont);
@@ -19,7 +20,7 @@ router.post("/signout", signoutCont);
 router.post("/google-login", googleOAuth);
 
 router.get("/user/me", verifyUser, authCont);
-
+router.put("/update-user", verifyUser, updateImgCont);
 router.get("/documents", verifyUser, getDocumentsCont);
 router.post("/document", verifyUser, addDocumentCont);
 
