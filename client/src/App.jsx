@@ -20,7 +20,7 @@ function App() {
           <Home />
         </>
       ) : (
-        <Navigate to="/login" replace={true} />
+        <Navigate to="/login" />
       ),
     },
     {

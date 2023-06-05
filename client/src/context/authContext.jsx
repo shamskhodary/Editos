@@ -29,25 +29,30 @@ const useProvideAuth = () => {
       }
       return { isLogged: true, message: userData.data.message };
     } catch (error) {
-      console.log(error);
+      setUser(null)
       return { isLogged: false, message: error.response.data.message };
     }
   };
 
+
+  const logout = async() => {
+      const signout = await axios.post('/signout');
+      setUser(null)
+      return {message: signout.data.message}
+  }
   useEffect(() => {
     const getUser = async () => {
       try {
         const user = await axios.get("/user/me");
-        console.log(user.data)
         setUser(user.data.data);
       } catch (error) {
-        console.log(error);
+       setUser(null);
       }
     };
     getUser();
   }, []);
 
-  return { user, signup, login, setUser };
+  return { user, signup, login, setUser, logout };
 };
 
 const ProvideAuth = ({ children }) => {

@@ -17,34 +17,32 @@ const googleOAuth = async (req, res) => {
 
     const payload = ticket.getPayload();
     const user = await signUserQuery(payload.email);
-
     if (user.rows[0]) {
       const token = await tokenGen({
         id: user.rows[0].id,
         username: user.rows[0].username,
       });
-
       res
         .cookie("tokie", token)
         .status(201)
-        .json({ message: "user logged in successfully", user: user.rows[0] });
+        .json({
+          message: "user logged in successfully",
+          user: { ...user.rows[0], image_url: payload.picture },
+        });
     } else {
       const pass = uuidv4();
-      const created = await createUserQuery(
-        payload.name,
-        payload.email,
-        pass,
-        payload.picture
-      );
+      const created = await createUserQuery(payload.name, payload.email, pass);
       const token = await tokenGen({
         id: created.rows[0].id,
         username: created.rows[0].username,
       });
-
-      res.cookie("tokie", token).status(201).json({
-        message: "user logged in successfully",
-        user: created.rows[0],
-      });
+      res
+        .cookie("tokie", token)
+        .status(201)
+        .json({
+          message: "user logged in successfully",
+          user: { ...created.rows[0], image_url: payload.picture },
+        });
     }
   } catch (error) {
     res.status(500).json(error);
