@@ -2,13 +2,14 @@ import React from "react";
 import "../styles/document-page.css";
 import LogoWriter from "./LogoWriter";
 import { FilePdfFilled } from "@ant-design/icons";
+import * as moment from "moment";
 
-const DocDetails = () => {
+const DocDetails = ({data}) => {
   return (
-    <div className="doc-details">
+    <div className="doc-details" key={data.id}>
       <LogoWriter />
       <h1>
-        Title <sub className="opened_at"> Last opened: 12:4:2002</sub>
+        {data.title} <sub className="opened_at"> Last opened: {moment(data.last_opened).fromNow()}</sub>
       </h1>
 
       <ul>

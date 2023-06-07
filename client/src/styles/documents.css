@@ -12,6 +12,7 @@
   height: 300px;
   border-radius: 3px;
   width: 20% !important;
+  overflow: hidden;
 }
 
 .gutter-row:hover {

@@ -1,3 +1,4 @@
+import addContentQuery from "../database/queries/addContentQuery.js";
 import addDocumentQuery from "../database/queries/addDocumentQuery.js";
 
 const addDocumentCont = async (req, res) => {
@@ -13,9 +14,11 @@ const addDocumentCont = async (req, res) => {
       created_at,
       last_opened
     );
-    res
-      .status(200)
-      .json({ data: addDoc.rows[0], message: "Document added successfully" });
+    const addContent = await addContentQuery("", addDoc.rows[0].id);
+    res.status(200).json({
+      data: { ...addDoc.rows[0], content: addContent.rows[0] },
+      message: "Document added successfully",
+    });
   } catch (err) {
     res
       .status(500 || err.status)

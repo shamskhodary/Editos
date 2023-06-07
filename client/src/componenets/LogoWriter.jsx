@@ -1,9 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Typewriter from "typewriter-effect";
 
 const LogoWriter = () => {
+  const navigate = useNavigate();
   return (
-    <div className="logo">
+    <div className="logo" onClick={() => navigate('/')}>
       <Typewriter
         style={{ color: "white" }}
         onInit={(typewriter) => {

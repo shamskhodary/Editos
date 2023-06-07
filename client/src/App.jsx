@@ -33,7 +33,7 @@ function App() {
       element: auth.user ? <Navigate to="/" /> : <Login />,
     },
     {
-      path: "/document/test",
+      path: "/document/:id",
       element: <Document />,
     },
     {
