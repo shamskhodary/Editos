@@ -52,7 +52,7 @@ const Documents = () => {
       <h2>Recent documents</h2>
       <Row className="row" gutter={16}>
         {documents.map((e) => 
-          <Col className="gutter-row" span={4} style={style} key={e.id}>
+          <Col className="gutter-row" span={4} style={style} key={e.id} >
           <div className="content-preview">
             <p>{e.inner_content}</p>
           </div>

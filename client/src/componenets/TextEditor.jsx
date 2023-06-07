@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
-import "./editor.css";
+import "../styles/editor.css";
 
 const toolbarOptions = [
   ["bold", "italic", "underline", "strike"], // toggled buttons

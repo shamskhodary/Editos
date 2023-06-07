@@ -8,6 +8,7 @@ import { Navigate } from "react-router-dom";
 import Login from "./componenets/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Document from "./pages/Document";
 
 function App() {
   const auth = useAuth();
@@ -30,6 +31,10 @@ function App() {
     {
       path: "/login",
       element: auth.user ? <Navigate to="/" /> : <Login />,
+    },
+    {
+      path: "/document/test",
+      element: <Document />,
     },
     {
       path: "*",
