@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap");
 
 .header {
   width: 100%;
-  background-color: #F1F6F9;
+  background-color: #f1f6f9;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,9 +14,9 @@
 
 .logo {
   width: 10%;
-  font-family: 'Fugaz One', cursive;
+  font-family: "Fugaz One", cursive;
   font-size: 1.5rem;
-  color: #212A3E;
+  color: #212a3e;
   cursor: pointer;
 }
 
@@ -38,4 +38,22 @@
   border-radius: 50%;
   border: 1px solid black;
   opacity: 0;
+}
+
+.logout-button {
+  border: none;
+  background: none;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  font-family: "Fugaz One", cursive;
+}
+
+.logout-button:hover {
+  color: #373c47;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.rightie {
+  display: flex;
 }

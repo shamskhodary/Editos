@@ -13,3 +13,8 @@
 body {
   font-family: 'Roboto', sans-serif;
 }
+
+html {
+  height: 100vh;
+  position: relative;
+}

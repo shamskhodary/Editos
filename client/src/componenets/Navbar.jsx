@@ -22,15 +22,18 @@ const Navbar = () => {
   );
 
   const updateImg = async (img) => {
-      const pic = await axios.put("/update-user", { image_url: img });
-      setUser({ ...user, image_url: pic.data.image});
+    const pic = await axios.put("/update-user", { image_url: img });
+    setUser({ ...user, image_url: pic.data.image });
   };
 
   const handleUpload = (e) => {
     const data = new FormData();
 
     data.append("file", e.target.files[0]);
-    data.append("upload_preset", process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
+    data.append(
+      "upload_preset",
+      process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
+    );
     data.append("cloud_name", process.env.REACT_APP_CLOUDINARY_CLOUD_NAME);
 
     fetch(`${process.env.REACT_APP_CLOUDINARY_UPLOAD_LINK}`, {
@@ -66,19 +69,23 @@ const Navbar = () => {
         >
           <Input.Search size="large" placeholder="input here" />
         </AutoComplete>
-        <Popover content={content} title="Google Account">
-          <div className="avatar">
-            <input type="file" onChange={handleUpload} />
-            {user?.id && (
-              <Avatar
-                icon={<UserOutlined />}
-                src={user.image_url || imgUrl}
-                style={{ width: "2.5rem", height: "2.5rem" }}
-              />
-            ) }
-          </div>
-        </Popover>
-          <button onClick={handleLogOut}>logout</button>
+        <div className="rightie">
+          <Popover content={content} title="Google Account">
+            <div className="avatar">
+              <input type="file" onChange={handleUpload} />
+              {user?.id && (
+                <Avatar
+                  icon={<UserOutlined />}
+                  src={user.image_url || imgUrl}
+                  style={{ width: "2.5rem", height: "2.5rem" }}
+                />
+              )}
+            </div>
+          </Popover>
+          <button className="logout-button" onClick={handleLogOut}>
+            Logout
+          </button>
+        </div>
       </header>
     </>
   );

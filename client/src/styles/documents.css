@@ -12,6 +12,7 @@
   height: 300px;
   border-radius: 3px;
   width: 20% !important;
+  overflow: hidden;
 }
 
 .gutter-row:hover {
@@ -72,4 +73,21 @@
   background-color: #c4bfbf;
   color: #fff;
   border-radius: 50%;
+}
+
+.plus-icon {
+  font-size: 2rem;
+  background-color: white;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #4285f4;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
 }
