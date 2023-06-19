@@ -11,10 +11,11 @@ import { toast } from "react-toastify";
 const Home = () => {
   const [documents, setDocuments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [deleted, setDeleted] = useState(false);
+  const [updated, setUpdated] = useState(false);
   const auth= useAuth();
   const navigate = useNavigate();
 
+  console.log(updated)
 
 
   useEffect(()=>{
@@ -31,7 +32,7 @@ const Home = () => {
     }
 
     docs();
-  },[deleted]);
+  },[updated]);
 
   const handleAddDoc = async()=> {
     try {
@@ -51,7 +52,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      {documents.length ? <Documents data={documents} isLoading={isLoading} setDeleted={setDeleted} />: <h3 style={{padding: "2rem"}}>No documents found</h3>}
+      {documents.length ? <Documents data={documents} isLoading={isLoading} updated={updated} setUpdated={setUpdated} />: <h3 style={{padding: "2rem"}}>No documents found</h3>}
       <PlusOutlined className="plus-icon" onClick={handleAddDoc}/>
     </>
   );
