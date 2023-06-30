@@ -15,8 +15,6 @@ const Home = () => {
   const auth= useAuth();
   const navigate = useNavigate();
 
-  console.log(updated)
-
 
   useEffect(()=>{
     const docs = async() => {
@@ -51,7 +49,7 @@ const Home = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar docs={documents}setDocuments={setDocuments}/>
       {documents.length ? <Documents data={documents} isLoading={isLoading} updated={updated} setUpdated={setUpdated} />: <h3 style={{padding: "2rem"}}>No documents found</h3>}
       <PlusOutlined className="plus-icon" onClick={handleAddDoc}/>
     </>

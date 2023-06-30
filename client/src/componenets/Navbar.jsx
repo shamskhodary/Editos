@@ -7,9 +7,11 @@ import { useAuth } from "../context/authContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const Navbar = () => {
+const Navbar = ({docs, setDocuments}) => {
   const { user, setUser, logout } = useAuth();
   const [imgUrl, setImgUrl] = useState("");
+  const [search, setSearch] = useState("");
+  // const 
 
   const content = (
     <div>
@@ -55,6 +57,13 @@ const Navbar = () => {
     }
   };
 
+  const handleSearch = (val) => {
+    console.log(docs, val)
+      const filteredDocs = docs.filter((doc) =>doc.title.toLowerCase().includes(val.toLowerCase()));
+      setDocuments(filteredDocs);
+
+  }
+
   return (
     <>
       <header className="header">
@@ -62,12 +71,14 @@ const Navbar = () => {
         <AutoComplete
           popupClassName="certain-category-search-dropdown"
           className="auto"
+          onSearch={handleSearch}
           dropdownMatchSelectWidth={500}
           style={{
             width: "40%",
           }}
         >
-          <Input.Search size="large" placeholder="input here" />
+          <Input.Search size="large" placeholder="input here" value={search}
+           onChange={e => setSearch(e.target.value)}/>
         </AutoComplete>
         <div className="rightie">
           <Popover content={content} title="Google Account">

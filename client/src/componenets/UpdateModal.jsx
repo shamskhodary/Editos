@@ -4,11 +4,12 @@ import { useState } from 'react';
 import axios from 'axios';
 
 const UpdateModal = ({open, handleCancel, setOpen, previousTitle, id, setUpdated, updated}) => {
+  
   const [title, setTitle] = useState('');
 
   const handleUpdate = async() => {
-    setOpen(false);
     await axios.put(`/document/${id}/update-title`, {title});
+    setOpen(false);
     setUpdated(!updated)
   }
 
