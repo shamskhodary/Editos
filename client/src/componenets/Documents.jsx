@@ -8,9 +8,10 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import UpdateModal from "./UpdateModal";
 
-const Documents = ({ data, isLoading, setUpdated, updated}) => {
+const Documents = ({ data, setUpdated, updated }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [info, setInfo] = useState({ id: "", title: "" });
 
   const style = {
     margin: "1rem",
@@ -37,12 +38,13 @@ const Documents = ({ data, isLoading, setUpdated, updated}) => {
 
   const handleOpen = () => setOpen(false);
 
-  const handleDelete = async (key, id) => {
+  const handleDelete = async (key, id, title) => {
     if (+key === 2) {
       const { data } = await axios.delete(`/document/${id}`);
       setUpdated(!updated);
       toast.success(data.message);
     } else if (+key === 1) {
+      setInfo({ id, title});
       setOpen(true);
     }
   };
@@ -54,7 +56,6 @@ const Documents = ({ data, isLoading, setUpdated, updated}) => {
 
   return (
     <>
-      {isLoading && <Spin />}
       <div className="documents">
         <h2>Recent documents</h2>
         <Row className="row" gutter={16}>
@@ -77,7 +78,7 @@ const Documents = ({ data, isLoading, setUpdated, updated}) => {
                     <span>Opened {moment(e.last_opened).calendar()}</span>
                     <Dropdown
                       menu={{
-                        onClick: ({ key }) => handleDelete(key, e.id),
+                        onClick: ({ key }) => handleDelete(key, e.id, e.title),
                         items: items,
                       }}
                       trigger={["click"]}
@@ -87,18 +88,18 @@ const Documents = ({ data, isLoading, setUpdated, updated}) => {
                   </div>
                 </div>
               </Col>
-              <UpdateModal
-                open={open}
-                setOpen={setOpen}
-                handleCancel={handleOpen}
-                previousTitle={e.title}
-                setUpdated={setUpdated}
-                updated={updated}
-                id={e.id}
-              />
             </>
           ))}
         </Row>
+        <UpdateModal
+          open={open}
+          setOpen={setOpen}
+          handleCancel={handleOpen}
+          previousTitle={info.title}
+          setUpdated={setUpdated}
+          updated={updated}
+          id={info.id}
+        />
       </div>
     </>
   );
