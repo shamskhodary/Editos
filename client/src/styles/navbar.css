@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&display=swap');
 
 .header {
   width: 100%;
@@ -14,8 +14,9 @@
 
 .logo {
   width: 10%;
-  font-family: "Fugaz One", cursive;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.5rem;
+  font-weight: 500;
   color: #212a3e;
   cursor: pointer;
 }
@@ -43,9 +44,9 @@
 .logout-button {
   border: none;
   background: none;
-  font-size: 1rem;
+  font-size: 0.8rem;
   margin-left: 0.5rem;
-  font-family: "Fugaz One", cursive;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .logout-button:hover {

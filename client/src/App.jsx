@@ -9,6 +9,8 @@ import Login from "./componenets/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Document from "./pages/Document";
+import { Spin } from "antd";
+
 
 function App() {
   const auth = useAuth();
@@ -16,13 +18,13 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: auth.user ? (
+      element: auth.loading? <Spin/> : (auth.user ? (
         <>
           <Home />
         </>
       ) : (
         <Navigate to="/login" />
-      ),
+      )),
     },
     {
       path: "/signup",

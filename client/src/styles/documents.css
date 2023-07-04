@@ -91,3 +91,7 @@
   bottom: 2rem;
   right: 2rem;
 }
+
+.ant-modal-title {
+  font-size: '1.5rem' !important
+}

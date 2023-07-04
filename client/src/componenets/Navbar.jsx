@@ -6,10 +6,14 @@ import LogoWriter from "./LogoWriter";
 import { useAuth } from "../context/authContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ docs }) => {
   const { user, setUser, logout } = useAuth();
   const [imgUrl, setImgUrl] = useState("");
+  const [search, setSearch] = useState("");
+  const [options, setOptions] = useState([]);
+  const navigate = useNavigate();
 
   const content = (
     <div>
@@ -55,6 +59,20 @@ const Navbar = () => {
     }
   };
 
+  const filteredDocs = (data) =>
+    docs
+      .filter((doc) => doc.title.toLowerCase().includes(data.toLowerCase()))
+      .map((e) => ({ value: e.title }));
+
+  const handleSearch = () => {
+    setOptions(search ? filteredDocs(search) : []);
+  };
+
+  const onSelect = (data) => {
+    const id = docs.find((e) => data === e.title).id;
+    navigate(`/document/${id}`);
+  };
+
   return (
     <>
       <header className="header">
@@ -62,12 +80,21 @@ const Navbar = () => {
         <AutoComplete
           popupClassName="certain-category-search-dropdown"
           className="auto"
+          options={options}
+          onSearch={handleSearch}
+          onSelect={onSelect}
           dropdownMatchSelectWidth={500}
           style={{
             width: "40%",
+            color: "black",
           }}
         >
-          <Input.Search size="large" placeholder="input here" />
+          <Input.Search
+            size="large"
+            placeholder="input here"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </AutoComplete>
         <div className="rightie">
           <Popover content={content} title="Google Account">

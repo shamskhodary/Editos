@@ -7,6 +7,7 @@ const useAuth = () => useContext(AuthContext);
 
 const useProvideAuth = () => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const signup = async (payload) => {
     try {
@@ -44,6 +45,7 @@ const useProvideAuth = () => {
     const getUser = async () => {
       try {
         const user = await axios.get("/user/me");
+        setLoading(false)
         setUser(user.data.data);
       } catch (error) {
        setUser(null);
@@ -52,7 +54,7 @@ const useProvideAuth = () => {
     getUser();
   }, []);
 
-  return { user, signup, login, setUser, logout };
+  return { user, loading, signup, login, setUser, logout };
 };
 
 const ProvideAuth = ({ children }) => {
