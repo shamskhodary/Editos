@@ -35,7 +35,9 @@ const signupCont = async (req, res) => {
     ) {
       res.status(401).json({ message: "username is taken ro7i" });
     } else {
-      res.status(500 || err.status).json({ message: err.message });
+      res
+        .status(500 || err.status)
+        .json({ message: "server error" || err.message });
     }
   }
 };
