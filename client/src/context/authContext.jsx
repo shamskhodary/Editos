@@ -11,7 +11,7 @@ const useProvideAuth = () => {
 
   const signup = async (payload) => {
     try {
-      const userData = await axios.post("/signup", payload);
+      const userData = await axios.post("/api/v1/signup", payload);
       if (userData.status === 201) {
         setUser(userData.data.user);
       }
