@@ -5,26 +5,24 @@ import dotenv from "dotenv";
 dotenv.config();
 
 let dbUrl = "";
+let ssl = false;
 const { NODE_ENV, DB_URL, DATABASE_URL } = process.env;
 
-if (NODE_ENV === "test") {
-  dbUrl = DB_URL_TEST;
+if (NODE_ENV === "development") {
+  dbUrl = DB_URL;
 } else if (NODE_ENV === "production") {
   dbUrl = DATABASE_URL;
+  ssl = {
+    rejectUnauthorized: false,
+  };
 } else {
-  dbUrl = DB_URL;
+  throw new Error("Invalid environment");
 }
 
-// if (!DATABASE_URL) {
-//   throw new Error('database not found');
-// }
+if (!dbUrl) {
+  throw new Error("database not found");
+}
 
-const connection = new Pool({
-  connectionString: dbUrl,
-  ssl:
-    process.env.NODE_ENV === "production"
-      ? { rejectUnauthorized: false }
-      : false,
-});
+const connection = new Pool({ dbUrl, ssl });
 
 export default connection;

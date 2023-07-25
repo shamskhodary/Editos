@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./src/index.js",
+    "start": "cross-env NODE_ENV=development nodemon ./src/index.js",
     "build": "npm run build",
     "dbbuild": "cross-env NODE_ENV=development node ./src/database/config/build.mjs",
     "build:db:production": "cross-env NODE_ENV=production node ./src/database/config/build.mjs"
