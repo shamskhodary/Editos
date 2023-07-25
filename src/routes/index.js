@@ -14,6 +14,7 @@ import authCont from "../controllers/authCont.js";
 import googleOAuth from "../auth/googleOAuth.js";
 import updateImgCont from "../controllers/updateImgCont.js";
 import updateTitleCont from "../controllers/updateTitleCont.js";
+import saveAsPDFCont from "../controllers/saveAsPDFCont.js";
 
 router.post("/signup", signupCont);
 router.post("/signin", signinCont);
@@ -31,5 +32,7 @@ router.put("/document/:id", verifyUser, updateDocumentCont);
 router.delete("/document/:id", verifyUser, deleteDocumentCont);
 
 router.post("/document/:id/content", addContentCont);
+
+router.get("/document/:id/pdf", saveAsPDFCont);
 
 export default router;

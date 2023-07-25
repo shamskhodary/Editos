@@ -7,23 +7,25 @@ import { useParams } from "react-router-dom";
 import { Spin } from "antd";
 
 const Document = () => {
-  const {id} = useParams();
-  const [doc, setDoc] = useState(null)
+  const { id } = useParams();
+  const [doc, setDoc] = useState(null);
+  const [saved, setSaved] = useState(false)
 
   useEffect(() => {
-    const doc = async() => {
+    const doc = async () => {
       const response = await axios.get(`/document/${id}`);
-      setDoc(response.data)
-    }
+      setSaved(true)
+      setDoc(response.data);
+    };
     doc();
-  }, [id])
+  }, [id]);
 
-  if(!doc) return (<Spin/>);
-  
+  if (!doc) return <Spin />;
+
   return (
     <div className="wrapper">
-      {doc && doc.map((e) => <DocDetails  data={e} key={e.id}/>)}
-      <TextEditor />
+      {doc && doc.map((e) => <DocDetails data={e} key={e.id} saved={saved} />)}
+      <TextEditor setSaved={setSaved} />
     </div>
   );
 };

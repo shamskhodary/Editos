@@ -1,7 +1,7 @@
 import * as moment from "moment";
 import "../styles/documents.css";
 import { useNavigate } from "react-router-dom";
-import { Col, Dropdown, Row, Spin, Tooltip } from "antd";
+import { Col, Dropdown, Row, Tooltip } from "antd";
 import { MoreOutlined, DeleteFilled, EditFilled } from "@ant-design/icons";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -53,20 +53,19 @@ const Documents = ({ data, setUpdated, updated }) => {
     navigate(`/document/${id}`);
     await axios.put(`/document/${id}`, { id });
   };
-
+  
   return (
     <>
       <div className="documents">
         <h2>Recent documents</h2>
-        <Row className="row" gutter={16}>
+        <Row className="row" gutter={16} key={0}>
           {data.map((e) => (
-            <>
               <Col className="gutter-row" span={4} style={style} key={e.id}>
                 <div
                   className="content-preview"
                   onClick={() => handleDoc(e.id)}
                 >
-                  <p>{e.inner_content}</p>
+                  <div dangerouslySetInnerHTML={{ __html: e.inner_content }} />
                 </div>
                 <div className="details">
                   <Tooltip title={e.title}>
@@ -88,7 +87,6 @@ const Documents = ({ data, setUpdated, updated }) => {
                   </div>
                 </div>
               </Col>
-            </>
           ))}
         </Row>
         <UpdateModal
