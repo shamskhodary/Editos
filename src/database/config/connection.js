@@ -13,6 +13,7 @@ if (NODE_ENV === "development") {
 } else if (NODE_ENV === "production") {
   dbUrl = DATABASE_URL;
   ssl = {
+    require: true,
     rejectUnauthorized: false,
   };
 } else {
@@ -23,6 +24,6 @@ if (!dbUrl) {
   throw new Error("database not found");
 }
 
-const connection = new Pool({ dbUrl, ssl });
+const connection = new Pool({ connectionString: dbUrl, ssl });
 
 export default connection;
