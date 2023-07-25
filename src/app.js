@@ -3,8 +3,13 @@ import router from "./routes/index.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { join } from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
 const app = express();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -16,6 +21,7 @@ app.use("/api/v1", router);
 app.get("/", (req, res) => {
   res.send("Hello lighto!");
 });
+console.log(__dirname);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(join(__dirname, "..", "client", "build")));
