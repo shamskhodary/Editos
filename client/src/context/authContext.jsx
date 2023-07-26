@@ -44,7 +44,7 @@ const useProvideAuth = () => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const user = await axios.get("/user/me");
+        const user = await axios.get("/api/v1/user/me");
         // setLoading(false)
         setUser(user.data.data);
       } catch (error) {
