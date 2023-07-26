@@ -24,7 +24,7 @@ const useProvideAuth = () => {
 
   const login = async (payload) => {
     try {
-      const userData = await axios.post("/signin", payload);
+      const userData = await axios.post("/api/v1/signin", payload);
       if (userData.status === 200) {
         setUser(userData.data.user);
       }
@@ -37,7 +37,7 @@ const useProvideAuth = () => {
 
 
   const logout = async() => {
-      const signout = await axios.post('/signout');
+      const signout = await axios.post('/api/v1/signout');
       setUser(null)
       return {message: signout.data.message}
   }

@@ -40,7 +40,7 @@ const Documents = ({ data, setUpdated, updated }) => {
 
   const handleDelete = async (key, id, title) => {
     if (+key === 2) {
-      const { data } = await axios.delete(`/document/${id}`);
+      const { data } = await axios.delete(`/api/v1/document/${id}`);
       setUpdated(!updated);
       toast.success(data.message);
     } else if (+key === 1) {
@@ -51,7 +51,7 @@ const Documents = ({ data, setUpdated, updated }) => {
 
   const handleDoc = async (id) => {
     navigate(`/document/${id}`);
-    await axios.put(`/document/${id}`, { id });
+    await axios.put(`/api/v1/document/${id}`, { id });
   };
   
   return (

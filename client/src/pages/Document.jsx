@@ -13,7 +13,7 @@ const Document = () => {
 
   useEffect(() => {
     const doc = async () => {
-      const response = await axios.get(`/document/${id}`);
+      const response = await axios.get(`/api/v1/document/${id}`);
       setSaved(true)
       setDoc(response.data);
     };

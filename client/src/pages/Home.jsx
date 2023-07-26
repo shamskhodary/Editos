@@ -19,7 +19,7 @@ const Home = () => {
     const docs = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get("/documents");
+        const response = await axios.get("/api/v1/documents");
         setDocuments(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -33,7 +33,7 @@ const Home = () => {
 
   const handleAddDoc = async () => {
     try {
-      const { data } = await axios.post("/document", {
+      const { data } = await axios.post("/api/v1/document", {
         title: "Untitled Document",
         user_id: auth.user.id,
       });

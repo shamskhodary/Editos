@@ -83,7 +83,7 @@ const TextEditor = ({setSaved}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`/document/${id}`);
+        const { data } = await axios.get(`/api/v1/document/${id}`);
         setContent(data[0]?.all_contents);
       } catch (error) {
         console.log(error);
@@ -96,7 +96,7 @@ const TextEditor = ({setSaved}) => {
     try {
       setSaved(false)
       setTimeout(async()=> {
-        await axios.post(`/document/${id}/content`, { inner_content: val });
+        await axios.post(`/api/v1/document/${id}/content`, { inner_content: val });
         setSaved(true)
       },[2000])
      

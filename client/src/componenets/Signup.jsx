@@ -32,7 +32,7 @@ const Signup = () => {
   };
 
   const handleGoogle = async(response) => {
-    const credentials = await axios.post('/google-login', {token: response.credential });
+    const credentials = await axios.post('/api/v1/google-login', {token: response.credential });
     if(credentials.data){
       auth.setUser(credentials.data.user);
       toast.success(credentials.data.message);

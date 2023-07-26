@@ -26,7 +26,7 @@ const Navbar = ({ docs }) => {
   );
 
   const updateImg = async (img) => {
-    const pic = await axios.put("/update-user", { image_url: img });
+    const pic = await axios.put("/api/v1/update-user", { image_url: img });
     setUser({ ...user, image_url: pic.data.image });
   };
 

@@ -15,7 +15,7 @@ const UpdateModal = ({
   const [title, setTitle] = useState("");
 
   const handleUpdate = async () => {
-    await axios.put(`/document/${id}/update-title`, { title });
+    await axios.put(`/api/v1/document/${id}/update-title`, { title });
     setOpen(false);
     setTitle("");
     setUpdated(!updated);
