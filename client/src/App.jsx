@@ -18,13 +18,13 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: auth.loading? <Spin/> : (auth.user ? (
+      element: auth.user ? (
         <>
           <Home />
         </>
       ) : (
         <Navigate to="/login" />
-      )),
+      )
     },
     {
       path: "/signup",
