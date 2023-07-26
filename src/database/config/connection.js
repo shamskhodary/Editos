@@ -20,9 +20,9 @@ if (NODE_ENV === "development") {
   throw new Error("Invalid environment");
 }
 
-// if (!dbUrl) {
-//   throw new Error("database not found");
-// }
+if (!dbUrl) {
+  throw new Error("database not found");
+}
 
 const connection = new Pool({ connectionString: dbUrl, ssl });
 
