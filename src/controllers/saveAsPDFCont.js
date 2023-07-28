@@ -25,7 +25,7 @@ const saveAsPDFCont = async (req, res) => {
     )
     .toStream((err, stream) => {
       if (err) {
-        res.status(500).send("Error generating PDF");
+        res.status(500).send(err);
       } else {
         res.setHeader("Content-Type", "application/pdf");
         res.setHeader(

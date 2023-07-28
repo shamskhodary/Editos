@@ -10,7 +10,6 @@ const DocDetails = ({data, saved}) => {
 
   const handlePdfFile = async() => {
     const pdfFile = await axios.get(`/api/v1/document/${data.id}/pdf`);
-    console.log(pdfFile);
     if(pdfFile.status === 204){
       toast.success('Document is uploaded')
     }
